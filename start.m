@@ -3,7 +3,7 @@ function retour = start(robot)
 % 
 if (robot.cible_detected==0)
     v = [0 ; 0];
-    if (robot.vx==0 && robot.vy==0) % le robot est immobile
+    if (robot.vx==0 && robot.vy==0)
         if (robot.x>=0.0 && robot.y >= 0.0)
             v = [4 ; 4]; % haut à droite
         end

@@ -202,16 +202,14 @@ classdef Robot < handle
         %%%%COLLISIONS MURS
         border_v = [0 0]; % direction opposée aux murs
         SAFE_BORDER = 0.2; % distance d'évitement des murs (20 cm)
-
         if INFO.murs.dist_droite < SAFE_BORDER
             border_v = border_v + [-0.1 0];
         end
         if INFO.murs.dist_gauche < SAFE_BORDER
-            border_v = border_v + [0.1 0];
+            border_v = border_v + [0.3 0.2];
         end        
         if INFO.murs.dist_haut < SAFE_BORDER
             border_v = border_v + [0 -0.1];
-            
         end
         if INFO.murs.dist_bas < SAFE_BORDER
             border_v = border_v + [0.2 0.3];
@@ -219,29 +217,21 @@ classdef Robot < handle
        
         %%%%RECHERCHES CIBLE
         start(robot);
-        %v = moyenne(robot, INFO);
         v = proximite(robot, INFO);
         v = v + border_v ;
         robot.move(v(1),v(2));
         
+        %%%%ATTAQUE CIBLE
         if (robot.cible_detected==1)
-% Le robot qui connait l'emplacement de la cible donne 
-    % l'information à tous ses voisins.
-    
             for i=1:INFO.nbVoisins
                 voisin = INFO.voisins{i};
                 voisin.set_info_cible(robot.cible_x, robot.cible_y);
             end
-       
-    % Si le robot connait l'emplacement de la cible
-    % il s'en rapproche jusqu'à ce qu'il puisse l'attaquer
         if (robot.cible_attacked==0)
             vx = robot.cible_x-robot.x ; 
             vy = robot.cible_y-robot.y ;
             robot.move(vx,vy);
         else
-            % S'il est assez proche pour attaquer, il s'immobilise (attaque
-            % automatique)
             robot.move(0,0);
         end
         end

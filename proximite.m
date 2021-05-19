@@ -6,7 +6,7 @@ if (INFO.nbVoisins)
     for i=1:INFO.nbVoisins
         distx = (INFO.voisins{i}.x - robot.x)^2;
         disty = (INFO.voisins{i}.y - robot.y)^2;
-        dist(i) = sqrt(distx + disty); % calcul de la distance entre robot et voisin{i}
+        dist(i) = sqrt(distx + disty);
     end
     courte = 1;
     for i=1:INFO.nbVoisins
@@ -14,8 +14,6 @@ if (INFO.nbVoisins)
             courte = i;
         end
     end
-	%disp('voisin le plus proche est : ');
-	%disp(courte);
 end
 if (courte && INFO.voisins{courte}.vx && INFO.voisins{courte}.vy)
 	v(1) = INFO.voisins{courte}.vx;
