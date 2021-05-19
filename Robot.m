@@ -235,21 +235,6 @@ classdef Robot < handle
             robot.move(0,0);
         end
         end
-        
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-
         end
         
 
